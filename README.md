@@ -1,5 +1,9 @@
 # 2024 - App Expo React Native com recursos de Autenticação usando Firebase
 
+## Depêndencias
+
+**AsincStorage**
+
 ## Documentação
 
 **Expo - Using Firebase:** https://docs.expo.dev/guides/using-firebase/
@@ -8,6 +12,6 @@
 
 **Firebase:**
 
--   Site oficial: https://firebase.google.com/
--   Documentação: https://firebase.google.com/docs
--   Autenticação: https://firebase.google.com/docs/auth/web/start
+- Site oficial: https://firebase.google.com/
+- Documentação: https://firebase.google.com/docs
+- Autenticação: https://firebase.google.com/docs/auth/web/start
