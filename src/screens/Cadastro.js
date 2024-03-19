@@ -25,6 +25,20 @@ export default function Cadastro({ navigation }) {
     try {
       /* Para cadastrar o usuário na nossa Api do firebase  */
       await createUserWithEmailAndPassword(auth, email, senha);
+      Alert.alert("Cadastro", "Cadastro Feito com sucesso!!😁", [
+        {
+          text: "Ficar aqui mesmo!",
+          style: "cancel",
+          onPress: () => {
+            return;
+          },
+        },
+        {
+          text: "Ir para a area logada",
+          style: "default",
+          onPress: () => navigation.replace("AreaLogada"),
+        },
+      ]);
     } catch (error) {
       console.error(error.code);
     }
