@@ -11,7 +11,10 @@ import {
 import { auth } from "../../firebase.config";
 
 // importando a função de login com e-mail e senha
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 import { useState } from "react";
 
@@ -53,7 +56,16 @@ export default function Login({ navigation }) {
     }
   };
 
-  const recuperarSenha = async () => {};
+  // Atalho: anfn -> cria arrow function sem a constante
+  const recuperarSenha = async () => {
+    try {
+      // Quando clicar no botão irá mandar um email para mudar a senha, essa função precisa do auth e email precisa ser importado
+      await sendPasswordResetEmail(auth, email);
+      Alert.alert("Recuperar Senha", "Verifique sua sua caixa de e-mails");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <View style={estilos.container}>
