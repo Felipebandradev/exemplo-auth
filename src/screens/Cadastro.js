@@ -8,6 +8,9 @@ import {
   View,
 } from "react-native";
 
+import { auth } from "../../firebase.config";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
 export default function Cadastro({ navigation }) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -18,7 +21,13 @@ export default function Cadastro({ navigation }) {
       Vibration.vibrate(300);
       return;
     }
-    console.log("Cadastrado");
+
+    try {
+      /* Para cadastrar o usuário na nossa Api do firebase  */
+      await createUserWithEmailAndPassword(auth, email, senha);
+    } catch (error) {
+      console.error(error.code);
+    }
   };
 
   return (
