@@ -41,6 +41,31 @@ export default function Cadastro({ navigation }) {
       ]);
     } catch (error) {
       console.error(error.code);
+
+      let menssagem;
+
+      switch (error.code) {
+        case "auth/invalid-credential":
+          menssagem = "Dados Invalidos";
+          break;
+        case "auth/invalid-email":
+          menssagem = "Endereço de email invalido";
+          break;
+
+        case "auth/email-already-in-use":
+          menssagem = "Email já cadastrado";
+          break;
+
+        case "auth/weak-password":
+          menssagem = "Senha fraca (mínimo de 6 characteres)! ";
+          break;
+
+        default:
+          menssagem = "Houve um erro, tente novamente mais tarde";
+          break;
+      }
+
+      Alert.alert("Ops!", menssagem);
     }
   };
 
