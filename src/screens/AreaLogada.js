@@ -9,8 +9,8 @@ export default function AreaLogada({ navigation }) {
   /*   Para ver os dados/Objetos recuperados que vem no auth
   console.log(auth.currentUser); */
 
-  /*  recuperando e-mail para uso  */
-  const { email } = auth.currentUser;
+  /*  recuperando e-mail e displayName: apelido para uso  */
+  const { email, displayName: nome } = auth.currentUser;
   console.log(email);
 
   // Função logout para sair da conta
@@ -28,9 +28,17 @@ export default function AreaLogada({ navigation }) {
   return (
     <View style={estilos.container}>
       <View style={estilos.topo}>
-        <Text style={estilos.bemVindo}>Bem-vindo(a)</Text>
+        <Text style={estilos.bemVindo}>Bem-vindo(a) {nome || "Visitante"}</Text>
         <Text>Seu E-mail de cadastro é: </Text>
         <Text style={{ fontWeight: "bold" }}>{email} </Text>
+
+        {nome && (
+          <>
+            <Text>Nome do Usuário: </Text>
+            <Text style={{ fontWeight: "bold" }}>{nome} </Text>
+          </>
+        )}
+
         <Button onPress={logout} title="Logout" color="#D35400" />
       </View>
       <View style={estilos.geral}>

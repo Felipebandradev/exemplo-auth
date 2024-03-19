@@ -9,22 +9,35 @@ import {
 } from "react-native";
 
 import { auth } from "../../firebase.config";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 export default function Cadastro({ navigation }) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [nome, setNome] = useState("");
 
   const cadastrar = async () => {
-    if (!email || !senha) {
-      Alert.alert("Atenção", "Preencha email ou senha");
+    if (!email || !senha || !nome) {
+      Alert.alert("Atenção", "Preencha email ou senha ou nome!");
       Vibration.vibrate(300);
       return;
     }
 
     try {
       /* Para cadastrar o usuário na nossa Api do firebase  */
-      await createUserWithEmailAndPassword(auth, email, senha);
+      const contaUsuario = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        senha
+      );
+
+      // console.log(contaUsuario.user);
+
+      if (contaUsuario.user) {
+        await updateProfile(auth.currentUser, { displayName: nome });
+        console.log(contaUsuario.user.displayName);
+      }
+
       Alert.alert("Cadastro", "Cadastro Feito com sucesso!!😁", [
         {
           text: "Ficar aqui mesmo!",
@@ -72,6 +85,12 @@ export default function Cadastro({ navigation }) {
   return (
     <View style={estilos.container}>
       <View style={estilos.formulario}>
+        <TextInput
+          onChangeText={(valor) => setNome(valor)}
+          placeholder="Nome"
+          style={estilos.input}
+          keyboardType="default"
+        />
         <TextInput
           onChangeText={(valor) => setEmail(valor)}
           placeholder="E-mail"
